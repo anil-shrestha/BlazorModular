@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Modules\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>  
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Modular.Shared\Modular.Shared.csproj" />
+    <ProjectReference Include="..\Modular.Library\Modular.Library.csproj" />
+  </ItemGroup>
+</Project>
