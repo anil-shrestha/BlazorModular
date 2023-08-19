@@ -11,7 +11,7 @@ public interface IModulesService
     void SyncModules();
 }
 
-public class ModulesService : IModulesService
+public sealed class ModulesService : IModulesService
 {
     public List<Assembly> ModuleAssemblies { get; private set; } = new();
     public List<IModule> Modules { get; private set; } = new();

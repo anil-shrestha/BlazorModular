@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MainWeb.Data;
 using MainWeb.Services;
+using Modular.Shared;
+using Modular.Library;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSingleton<IAppDbContext>(new AppDbContextSqlite(builder.Configuration.GetConnectionString("Database")));
 builder.Services.AddSingleton<IModulesService, ModulesService>();
 var app = builder.Build();
 
