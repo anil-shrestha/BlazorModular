@@ -1,4 +1,4 @@
-﻿@inject ModulesService modulesService
+﻿@inject IModulesService modulesService
 <Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="modulesService.ModuleAssemblies">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />

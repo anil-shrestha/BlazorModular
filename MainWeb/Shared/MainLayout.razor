@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
-
+@inject IModulesService modulesService
+@inject NavigationManager navManager
 <PageTitle>MainWeb</PageTitle>
 
 <div class="page">
@@ -9,7 +10,8 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+            <button class="btn btn-primary" @onclick="ReloadModules">
+                <span class="oi oi-reload"  aria-hidden="true"></span>&nbsp;Re-Sync Modules</button>
         </div>
 
         <article class="content px-4">
@@ -17,3 +19,11 @@
         </article>
     </main>
 </div>
+
+@code{
+    void ReloadModules()
+    {
+        modulesService.SyncModules();
+        navManager.NavigateTo(navManager.Uri, true);
+    }
+}

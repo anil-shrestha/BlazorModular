@@ -1,0 +1,35 @@
+<h2>Upload Modules</h2>
+<div>
+    <InputFile OnChange="@LoadFiles" multiple/>
+    <br /><br />
+    <button @onclick="OnUpload" class="btn btn-primary">Upload</button>
+</div>
+<div>
+    @((MarkupString)error)
+</div>
+@code {
+    string error = string.Empty;
+    IReadOnlyList<IBrowserFile> selectedFiles;
+    private async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+
+        selectedFiles = e.GetMultipleFiles();
+    }
+    private async Task OnUpload()
+    {
+        foreach (var file in selectedFiles)
+        {
+            try
+            {
+                await using FileStream fs = new(Path.Combine(@$"{Environment.CurrentDirectory}\Modules", file.Name), FileMode.Create);
+                await file.OpenReadStream().CopyToAsync(fs);
+                error +=  $"<div style='color:green'>Upload Success for {file.Name}</div>";
+
+            }
+            catch (Exception ex)
+            {
+                error += $"<div style='color:red'>Upload Failed for {file.Name}-->{ex.Message}</div>";
+            }
+        }
+    }
+}
